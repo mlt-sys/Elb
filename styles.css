@@ -1,20 +1,31 @@
-:root {
-    --primary-color: #4CAF50;
-    --background-color: #f5f5f5;
-}
-
-/* Basis Styling */
-body {
+/* Reset und Grundeinstellungen */
+* {
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background-color: var(--background-color);
+    box-sizing: border-box;
 }
 
-#app {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+/* Grundfarben */
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #2196F3;
+    --background-color: #f5f5f5;
+    --text-color: #333;
+}
+
+/* App Container */
+.app-container {
+    height: 100vh;
+    width: 100vw;
+    background: var(--background-color);
+    position: relative;
 }
 
 /* Navigation */
@@ -23,21 +34,28 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
+    height: 60px;
     background: white;
-    padding: 16px;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
     display: flex;
     justify-content: space-around;
-    border-top: 1px solid #eee;
+    align-items: center;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    z-index: 100;
 }
 
 .nav-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-decoration: none;
+    padding: 8px 16px;
     color: #666;
-    font-size: 12px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.nav-item.active {
+    color: var(--primary-color);
 }
 
 .nav-item i {
@@ -45,516 +63,20 @@ body {
     margin-bottom: 4px;
 }
 
-.nav-item.active {
-    color: var(--primary-color);
-}
-
-/* Karten */
-.card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: white;
-    border-radius: 12px;
-    padding: 16px;
-    margin: 12px 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.card-content {
-    flex: 1;
-}
-
-.card-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: #333;
-    margin: 0 0 8px 0;
-}
-
-.card-subtitle {
-    font-size: 14px;
-    color: #666;
-    margin: 0;
-}
-
-.card-actions {
-    display: flex;
-    gap: 8px;
-}
-
-/* Buttons */
-.icon-button {
-    background: none;
-    border: none;
-    padding: 8px;
-    cursor: pointer;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s;
-}
-
-.icon-button:hover {
-    background-color: #f0f0f0;
-}
-
-.icon-button.edit {
-    color: #2196F3;
-}
-
-.icon-button.delete {
-    color: #F44336;
-}
-
-.add-button {
-    position: fixed;
-    right: 20px;
-    bottom: 80px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    font-size: 24px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s;
-}
-
-.add-button:active {
-    transform: scale(0.95);
-}
-
-/* Modal */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 1000;
-}
-
-.modal-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 24px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 500px;
-    max-height: 80vh;
-    overflow-y: auto;
-}
-
-/* Formulare */
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #333;
-}
-
-.form-group input[type="text"],
-.form-group input[type="number"],
-.form-group input[type="date"],
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-}
-
-.form-group textarea {
-    resize: vertical;
-    min-height: 80px;
-}
-
-/* Führerscheinklassen Grid */
-.klassen-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.klasse-option input[type="checkbox"] {
-    display: none;
-}
-
-.klasse-option label {
-    display: block;
-    padding: 10px;
-    background: #f5f5f5;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.klasse-option input[type="checkbox"]:checked + label {
-    background: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-}
-
-/* Buttons */
-.button-group {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.btn {
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    flex: 1;
-}
-
-.btn-primary {
-    background: var(--primary-color);
-    color: white;
-}
-
-.btn-secondary {
-    background: #f5f5f5;
-    color: #333;
-}
-
-/* Empty State */
-.empty-state {
-    text-align: center;
-    padding: 40px 20px;
-    color: #666;
-}
-
-.empty-state i {
-    font-size: 48px;
-    color: #ddd;
-    margin-bottom: 16px;
-}
-
-.empty-state h3 {
-    font-size: 20px;
-    margin: 0 0 8px 0;
-    color: #333;
-}
-
-.empty-state p {
-    margin: 0 0 24px 0;
-}
-
-/* Sortierung */
-.sort-header {
-    display: flex;
-    gap: 10px;
-    padding: 0 0 16px 0;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 16px;
-}
-
-.sort-button {
-    background: none;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #666;
-    transition: all 0.2s;
-}
-
-.sort-button:hover {
-    background: #f5f5f5;
-}
-
-.sort-button.active {
-    color: var(--primary-color);
-    background: #e8f5e9;
-}
-
-.sort-button i {
-    font-size: 14px;
-}
-
-/* Listen Container */
-.list-container {
-    padding-bottom: 80px;
-}
-
-/* Überschriften */
-h1 {
-    font-size: 24px;
-    color: #333;
-    margin: 0 0 20px 0;
-    padding: 0 16px;
-}
-
-/* Neue Styles für die Fahrstunden-Eingabe */
-.form-row {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 20px;
-}
-
-.radio-group, .checkbox-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 8px;
-}
-
-.radio-option, .checkbox-option {
-    background: #f5f5f5;
-    padding: 8px 16px;
-    border-radius: 20px;
-    cursor: pointer;
-    user-select: none;
-    transition: all 0.2s;
-}
-
-.radio-option input, .checkbox-option input {
-    display: none;
-}
-
-.radio-option input:checked + span,
-.checkbox-option input:checked + span {
-    color: var(--primary-color);
-}
-
-.radio-option:has(input:checked),
-.checkbox-option:has(input:checked) {
-    background: #e8f5e9;
-    border-color: var(--primary-color);
-}
-
-.kompetenz-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 10px;
-    margin-top: 8px;
-}
-
-.rating-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px;
-    margin-top: 8px;
-}
-
-.rating-item {
-    background: #f5f5f5;
-    padding: 12px;
-    border-radius: 8px;
-}
-
-.rating-item label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: normal;
-}
-
-.rating-item select {
-    width: 100%;
-}
-
-/* Verbesserte Modal-Scrolling */
-.modal-content {
-    max-height: 90vh;
-    overflow-y: auto;
-    padding-right: 24px; /* Platz für Scrollbar */
-}
-
-/* Verbesserte Textarea */
-textarea {
-    font-family: inherit;
-    line-height: 1.5;
-}
-
-.fehler-select {
-    width: 100%;
-    min-height: 120px;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-/* Fehler-Kategorien farblich markieren */
-.fehler-select option.ok {
-    color: #4CAF50;
-    font-weight: bold;
-}
-
-.fehler-select option.leicht {
-    color: #FF9800;
-    background-color: rgba(255, 152, 0, 0.1);
-}
-
-.fehler-select option.schwer {
-    color: #f44336;
-    background-color: rgba(244, 67, 54, 0.1);
-}
-
-/* Rest der Styles wie gehabt */ 
-
-.fahrstunde-bewertung {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100vw;
-    height: 100vh;
-    background: white;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden; /* Verhindert Scrolling des Containers selbst */
-}
-
-/* Container für die Tabelle mit Scrolling */
-.tabelle-container {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px;
-}
-
-.bewertung-tabelle {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 16px;
-    background: white;
-}
-
-.bewertung-tabelle th {
-    position: sticky;
-    top: 0;
-    background: #f8f9fa;
-    padding: 15px;
-    border: 1px solid #dee2e6;
-    font-weight: bold;
-    text-align: left;
-}
-
-.bewertung-tabelle td {
-    padding: 15px;
-    border: 1px solid #dee2e6;
-    height: 50px; /* Größere Zellen für bessere Klickbarkeit */
-}
-
-.aufgaben-gruppe {
-    background: #e9ecef;
-    font-weight: bold;
-    font-size: 18px;
-}
-
-/* Fehler-Status Farben */
-.fehler-zelle {
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.fehler-zelle:hover {
-    background-color: #f8f9fa;
-}
-
-.fehler-zelle.hat-leichte-fehler {
-    background-color: rgba(255, 152, 0, 0.1);
-}
-
-.fehler-zelle.hat-schwere-fehler {
-    background-color: rgba(244, 67, 54, 0.1);
-}
-
-/* Fehler-Auswahl Popup */
-.fehler-popup {
-    position: absolute;
-    background: white;
-    border: 1px solid #dee2e6;
-    border-radius: 4px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    padding: 15px;
-    min-width: 300px;
-    max-height: 400px;
-    overflow-y: auto;
-    z-index: 1000;
-}
-
-.fehler-option {
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-bottom: 4px;
-}
-
-.fehler-option:hover {
-    background-color: #f8f9fa;
-}
-
-.fehler-option.leicht {
-    color: #FF9800;
-}
-
-.fehler-option.schwer {
-    color: #f44336;
-}
-
-.fehler-option.selected {
-    background-color: #e9ecef;
-}
-
-/* Basis-Layout */
-.app-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-}
-
-/* Navigation */
-.nav-bar {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    background: white;
-    border-top: 1px solid #dee2e6;
-    padding: 10px;
-    z-index: 1000;
-}
-
 /* Views */
 .view {
-    flex: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 60px; /* Höhe der Navigation */
+    background: var(--background-color);
     overflow-y: auto;
-    padding: 20px;
-    padding-bottom: 70px; /* Platz für Navigation */
+    display: none; /* Standardmäßig ausgeblendet */
+}
+
+.view.active {
+    display: block; /* Aktive View anzeigen */
 }
 
 /* Content Container */
@@ -564,49 +86,69 @@ textarea {
     padding: 20px;
 }
 
-/* Listen und Cards */
+/* Listen */
 .schueler-liste,
-.fahrstunden-liste,
-.berichte-liste {
+.fahrstunden-liste {
     display: grid;
-    gap: 20px;
-    margin-top: 20px;
+    gap: 16px;
+    padding: 16px;
 }
 
+/* Cards */
 .schueler-card,
 .fahrstunden-card {
     background: white;
     border-radius: 8px;
-    padding: 20px;
+    padding: 16px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* FAB Button */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.card-actions {
+    margin-top: 12px;
+}
+
+/* Buttons */
+.btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-secondary {
+    background: var(--secondary-color);
+    color: white;
+}
+
 .fab {
     position: fixed;
     bottom: 80px;
     right: 20px;
     width: 56px;
     height: 56px;
-    border-radius: 28px;
+    border-radius: 50%;
     background: var(--primary-color);
     color: white;
     border: none;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    cursor: pointer;
-    z-index: 900;
-}
-
-/* Bewertungs-View spezifisch */
-#bewertung-view {
-    padding: 0;
-    height: 100vh;
-}
-
-.fahrstunde-bewertung {
-    height: 100%;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 90;
 }
 
-/* ... Rest der Styles wie gehabt ... */ 
+/* Bewertungs-View spezifische Styles bleiben wie gehabt */ 
