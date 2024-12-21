@@ -2,9 +2,8 @@ class FahrschulApp {
     constructor() {
         this.initializeDB();
         this.setupEventListeners();
-        this.currentView = 'schueler'; // Standard-Ansicht
-        
-        // Initiale Anzeige der Schülerliste
+        this.currentView = 'schueler';
+        this.sortOrder = 'name-asc'; // Standard-Sortierung: Name aufsteigend
         this.renderSchuelerListe();
     }
 
@@ -103,6 +102,23 @@ class FahrschulApp {
         document.getElementById('schueler-modal').style.display = 'none';
     }
 
+    sortSchueler(schueler) {
+        const sorted = [...schueler]; // Kopie des Arrays erstellen
+        
+        switch(this.sortOrder) {
+            case 'name-asc':
+                return sorted.sort((a, b) => a.name.localeCompare(b.name));
+            case 'name-desc':
+                return sorted.sort((a, b) => b.name.localeCompare(a.name));
+            case 'date-asc':
+                return sorted.sort((a, b) => new Date(a.erstelltAm) - new Date(b.erstelltAm));
+            case 'date-desc':
+                return sorted.sort((a, b) => new Date(b.erstelltAm) - new Date(a.erstelltAm));
+            default:
+                return sorted;
+        }
+    }
+
     renderSchuelerListe() {
         const liste = document.getElementById('schueler-liste');
         
@@ -118,23 +134,51 @@ class FahrschulApp {
                 </div>
             `;
         } else {
-            liste.innerHTML = this.db.schueler.map(schueler => `
-                <div class="card">
-                    <div class="card-content">
-                        <h2 class="card-title">${schueler.name}</h2>
-                        <p class="card-subtitle">Klassen: ${schueler.klassen.join(', ')}</p>
-                    </div>
-                    <div class="card-actions">
-                        <button class="icon-button edit" onclick="app.editSchueler(${schueler.id})">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="icon-button delete" onclick="app.deleteSchueler(${schueler.id})">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
+            liste.innerHTML = `
+                <div class="sort-header">
+                    <button class="sort-button ${this.sortOrder.startsWith('name') ? 'active' : ''}" 
+                            onclick="app.toggleSort('name')">
+                        Name
+                        <i class="fas fa-sort${this.sortOrder === 'name-asc' ? '-up' : this.sortOrder === 'name-desc' ? '-down' : ''}"></i>
+                    </button>
+                    <button class="sort-button ${this.sortOrder.startsWith('date') ? 'active' : ''}"
+                            onclick="app.toggleSort('date')">
+                        Datum
+                        <i class="fas fa-sort${this.sortOrder === 'date-asc' ? '-up' : this.sortOrder === 'date-desc' ? '-down' : ''}"></i>
+                    </button>
                 </div>
-            `).join('');
+                ${this.sortSchueler(this.db.schueler).map(schueler => `
+                    <div class="card">
+                        <div class="card-content">
+                            <h2 class="card-title">${schueler.name}</h2>
+                            <p class="card-subtitle">
+                                Klassen: ${schueler.klassen.join(', ')}
+                                <br>
+                                <small>Erstellt: ${new Date(schueler.erstelltAm).toLocaleDateString()}</small>
+                            </p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="icon-button edit" onclick="app.editSchueler(${schueler.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="icon-button delete" onclick="app.deleteSchueler(${schueler.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('')}`;
         }
+    }
+
+    toggleSort(field) {
+        if (this.sortOrder === `${field}-asc`) {
+            this.sortOrder = `${field}-desc`;
+        } else if (this.sortOrder === `${field}-desc`) {
+            this.sortOrder = `${field}-asc`;
+        } else {
+            this.sortOrder = `${field}-asc`;
+        }
+        this.renderSchuelerListe();
     }
 
     editSchueler(id) {
