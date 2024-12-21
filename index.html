@@ -260,6 +260,43 @@
                         </div>
                     </div>
 
+                    <div class="fahrstunde-bewertung">
+                        <table class="bewertung-tabelle">
+                            <thead>
+                                <tr>
+                                    <th>Fahraufgabe</th>
+                                    <th>Fehler</th>
+                                    <th>Bemerkung</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- 1.1 Einfädelungsstreifen -->
+                                <tr class="aufgaben-gruppe">
+                                    <td colspan="3">1.1 Einfädelungsstreifen</td>
+                                </tr>
+                                <tr>
+                                    <td>Geschwindigkeitsanpassung</td>
+                                    <td>
+                                        <select class="fehler-select" name="fehler_11_geschwindigkeit" multiple>
+                                            <option value="ok" class="ok">✓ Keine Fehler</option>
+                                            <!-- Leichte Fehler -->
+                                            <option value="l1" class="leicht">Zu zögerlich beschleunigt</option>
+                                            <option value="l2" class="leicht">Geschwindigkeit nicht optimal angepasst</option>
+                                            <option value="l3" class="leicht">Späte Reaktion auf Verkehrszeichen</option>
+                                            <!-- Schwere Fehler -->
+                                            <option value="s1" class="schwer">Deutlich zu langsam</option>
+                                            <option value="s2" class="schwer">Starkes Beschleunigen/Verzögern</option>
+                                            <option value="s3" class="schwer">Verkehrszeichen missachtet</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="bemerkung-input" name="bemerkung_11_geschwindigkeit">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                     <div class="button-group">
                         <button type="button" class="btn btn-secondary" onclick="app.closeFahrstundenModal()">Abbrechen</button>
                         <button type="submit" class="btn btn-primary">Speichern</button>

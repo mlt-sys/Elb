@@ -394,4 +394,30 @@ h1 {
 textarea {
     font-family: inherit;
     line-height: 1.5;
-} 
+}
+
+.fehler-select {
+    width: 100%;
+    min-height: 120px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Fehler-Kategorien farblich markieren */
+.fehler-select option.ok {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.fehler-select option.leicht {
+    color: #FF9800;
+    background-color: rgba(255, 152, 0, 0.1);
+}
+
+.fehler-select option.schwer {
+    color: #f44336;
+    background-color: rgba(244, 67, 54, 0.1);
+}
+
+/* Rest der Styles wie gehabt */ 

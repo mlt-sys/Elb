@@ -103,6 +103,8 @@ class FahrschulApp {
             this.closeFahrstundenModal();
             e.target.reset();
         });
+
+        this.setupFehlerSelects();
     }
 
     switchView(view) {
@@ -299,6 +301,27 @@ class FahrschulApp {
             this.saveData();
             this.renderFahrstundenListe();
         }
+    }
+
+    setupFehlerSelects() {
+        document.querySelectorAll('.fehler-select').forEach(select => {
+            select.addEventListener('change', (e) => {
+                const selectedOptions = Array.from(e.target.selectedOptions);
+                
+                // Wenn "Keine Fehler" gewählt wird, alle anderen abwählen
+                if (selectedOptions.some(opt => opt.value === 'ok')) {
+                    Array.from(e.target.options).forEach(opt => {
+                        if (opt.value !== 'ok') opt.selected = false;
+                    });
+                }
+                
+                // Wenn ein Fehler gewählt wird, "Keine Fehler" abwählen
+                if (selectedOptions.some(opt => opt.value !== 'ok')) {
+                    const okOption = Array.from(e.target.options).find(opt => opt.value === 'ok');
+                    if (okOption) okOption.selected = false;
+                }
+            });
+        });
     }
 }
 
