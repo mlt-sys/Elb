@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Fahrschul-App</title>
 </head>
 <body>
@@ -12,26 +13,60 @@
         <!-- Schüler-Ansicht -->
         <div class="view schueler-view">
             <h1>Schüler</h1>
-            <div id="schueler-liste"></div>
+            <div class="list-container" id="schueler-liste">
+                <!-- Beispiel-Karte -->
+                <div class="card">
+                    <h2 class="card-title">Max Mustermann</h2>
+                    <p class="card-subtitle">Letzte Fahrstunde: 20.03.2024</p>
+                </div>
+            </div>
+            <button class="add-button" id="add-schueler">
+                <i class="fas fa-plus"></i>
+            </button>
         </div>
 
         <!-- Fahrstunden-Ansicht -->
         <div class="view fahrstunden-view" style="display: none;">
             <h1>Fahrstunden</h1>
-            <div id="fahrstunden-liste"></div>
+            <div class="list-container" id="fahrstunden-liste">
+                <div class="card">
+                    <h2 class="card-title">Stadtfahrt</h2>
+                    <p class="card-subtitle">Max Mustermann • 45 Min • 20.03.2024</p>
+                </div>
+            </div>
+            <button class="add-button" id="add-fahrstunde">
+                <i class="fas fa-plus"></i>
+            </button>
         </div>
 
         <!-- Berichte-Ansicht -->
         <div class="view berichte-view" style="display: none;">
             <h1>Berichte</h1>
-            <div id="berichte-liste"></div>
+            <div class="list-container" id="berichte-liste">
+                <div class="card">
+                    <h2 class="card-title">Monatsbericht März</h2>
+                    <p class="card-subtitle">15 Fahrstunden • 5 Schüler</p>
+                </div>
+            </div>
+            <button class="add-button" id="create-bericht">
+                <i class="fas fa-plus"></i>
+            </button>
         </div>
 
         <!-- Navigation -->
         <nav class="nav-bar">
-            <a href="#" class="nav-item active" data-view="schueler">Schüler</a>
-            <a href="#" class="nav-item" data-view="fahrstunden">Fahrstunden</a>
-            <a href="#" class="nav-item" data-view="berichte">Berichte</a>
+            <a href="#" class="nav-item active" data-view="schueler">
+                <i class="fas fa-user"></i>
+                <span>Schüler</span>
+            </a>
+            <a href="#" class="nav-item" data-view="fahrstunden">
+                <i class="fas fa-car"></i>
+                <span>Fahrstunden</span>
+            </a>
+            <a href="#" class="nav-item" data-view="berichte">
+                <i class="fas fa-file-alt"></i>
+                <span>Berichte</span>
+            </a>
         </nav>
     </div>
 
