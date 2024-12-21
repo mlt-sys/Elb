@@ -3,6 +3,9 @@ class FahrschulApp {
         this.initializeDB();
         this.setupEventListeners();
         this.currentView = 'schueler'; // Standard-Ansicht
+        
+        // Initiale Anzeige der Schülerliste
+        this.renderSchuelerListe();
     }
 
     initializeDB() {
@@ -73,6 +76,11 @@ class FahrschulApp {
         document.querySelectorAll('.view').forEach(v => v.style.display = 'none');
         document.querySelector(`.${view}-view`).style.display = 'block';
         
+        // Aktualisiere die Liste beim Wechsel zur Schüleransicht
+        if (view === 'schueler') {
+            this.renderSchuelerListe();
+        }
+        
         // Update aktive Navigation
         document.querySelectorAll('.nav-item').forEach(item => {
             item.classList.remove('active');
@@ -97,22 +105,36 @@ class FahrschulApp {
 
     renderSchuelerListe() {
         const liste = document.getElementById('schueler-liste');
-        liste.innerHTML = this.db.schueler.map(schueler => `
-            <div class="card">
-                <div class="card-content">
-                    <h2 class="card-title">${schueler.name}</h2>
-                    <p class="card-subtitle">Klassen: ${schueler.klassen.join(', ')}</p>
-                </div>
-                <div class="card-actions">
-                    <button class="icon-button edit" onclick="app.editSchueler(${schueler.id})">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                    <button class="icon-button delete" onclick="app.deleteSchueler(${schueler.id})">
-                        <i class="fas fa-trash"></i>
+        
+        if (this.db.schueler.length === 0) {
+            liste.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-user-graduate"></i>
+                    <h3>Keine Schüler vorhanden</h3>
+                    <p>Füge deinen ersten Fahrschüler hinzu!</p>
+                    <button class="btn btn-primary" onclick="app.showSchuelerModal()">
+                        <i class="fas fa-plus"></i> Schüler hinzufügen
                     </button>
                 </div>
-            </div>
-        `).join('');
+            `;
+        } else {
+            liste.innerHTML = this.db.schueler.map(schueler => `
+                <div class="card">
+                    <div class="card-content">
+                        <h2 class="card-title">${schueler.name}</h2>
+                        <p class="card-subtitle">Klassen: ${schueler.klassen.join(', ')}</p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="icon-button edit" onclick="app.editSchueler(${schueler.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="icon-button delete" onclick="app.deleteSchueler(${schueler.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
     }
 
     editSchueler(id) {
