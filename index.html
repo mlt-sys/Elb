@@ -264,9 +264,9 @@
                         <table class="bewertung-tabelle">
                             <thead>
                                 <tr>
-                                    <th>Fahraufgabe</th>
-                                    <th>Fehler</th>
-                                    <th>Bemerkung</th>
+                                    <th style="width: 25%">Fahraufgabe</th>
+                                    <th style="width: 50%">Fehler/Bemerkungen</th>
+                                    <th style="width: 25%">Maßnahmen</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -276,23 +276,14 @@
                                 </tr>
                                 <tr>
                                     <td>Geschwindigkeitsanpassung</td>
-                                    <td>
-                                        <select class="fehler-select" name="fehler_11_geschwindigkeit" multiple>
-                                            <option value="ok" class="ok">✓ Keine Fehler</option>
-                                            <!-- Leichte Fehler -->
-                                            <option value="l1" class="leicht">Zu zögerlich beschleunigt</option>
-                                            <option value="l2" class="leicht">Geschwindigkeit nicht optimal angepasst</option>
-                                            <option value="l3" class="leicht">Späte Reaktion auf Verkehrszeichen</option>
-                                            <!-- Schwere Fehler -->
-                                            <option value="s1" class="schwer">Deutlich zu langsam</option>
-                                            <option value="s2" class="schwer">Starkes Beschleunigen/Verzögern</option>
-                                            <option value="s3" class="schwer">Verkehrszeichen missachtet</option>
-                                        </select>
+                                    <td class="fehler-zelle" data-fehler-kategorie="geschwindigkeit">
+                                        <div class="fehler-text">Klicken zum Bearbeiten</div>
                                     </td>
                                     <td>
-                                        <input type="text" class="bemerkung-input" name="bemerkung_11_geschwindigkeit">
+                                        <input type="text" class="massnahmen-input" placeholder="Maßnahmen eingeben...">
                                     </td>
                                 </tr>
+                                <!-- Weitere Fahraufgaben... -->
                             </tbody>
                         </table>
                     </div>
