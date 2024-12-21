@@ -261,31 +261,33 @@
                     </div>
 
                     <div class="fahrstunde-bewertung">
-                        <table class="bewertung-tabelle">
-                            <thead>
-                                <tr>
-                                    <th style="width: 25%">Fahraufgabe</th>
-                                    <th style="width: 50%">Fehler/Bemerkungen</th>
-                                    <th style="width: 25%">Maßnahmen</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- 1.1 Einfädelungsstreifen -->
-                                <tr class="aufgaben-gruppe">
-                                    <td colspan="3">1.1 Einfädelungsstreifen</td>
-                                </tr>
-                                <tr>
-                                    <td>Geschwindigkeitsanpassung</td>
-                                    <td class="fehler-zelle" data-fehler-kategorie="geschwindigkeit">
-                                        <div class="fehler-text">Klicken zum Bearbeiten</div>
-                                    </td>
-                                    <td>
-                                        <input type="text" class="massnahmen-input" placeholder="Maßnahmen eingeben...">
-                                    </td>
-                                </tr>
-                                <!-- Weitere Fahraufgaben... -->
-                            </tbody>
-                        </table>
+                        <div class="tabelle-container">
+                            <table class="bewertung-tabelle">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 25%">Fahraufgabe</th>
+                                        <th style="width: 50%">Fehler/Bemerkungen</th>
+                                        <th style="width: 25%">Maßnahmen</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 1.1 Einfädelungsstreifen -->
+                                    <tr class="aufgaben-gruppe">
+                                        <td colspan="3">1.1 Einfädelungsstreifen</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Geschwindigkeitsanpassung</td>
+                                        <td class="fehler-zelle" data-fehler-kategorie="geschwindigkeit">
+                                            <div class="fehler-text">Klicken zum Bearbeiten</div>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="massnahmen-input" placeholder="Maßnahmen eingeben...">
+                                        </td>
+                                    </tr>
+                                    <!-- Weitere Fahraufgaben... -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                     <div class="button-group">

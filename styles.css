@@ -428,15 +428,26 @@ textarea {
     left: 0;
     right: 0;
     bottom: 0;
+    width: 100vw;
+    height: 100vh;
     background: white;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Verhindert Scrolling des Containers selbst */
+}
+
+/* Container für die Tabelle mit Scrolling */
+.tabelle-container {
+    flex: 1;
     overflow-y: auto;
+    padding: 20px;
 }
 
 .bewertung-tabelle {
     width: 100%;
     border-collapse: collapse;
     font-size: 16px;
+    background: white;
 }
 
 .bewertung-tabelle th {
