@@ -9,10 +9,10 @@
     <title>Fahrschul-App</title>
 </head>
 <body>
-    <div id="app">
-        <!-- Navigation bleibt bestehen -->
+    <div class="app-container">
+        <!-- Navigation -->
         <nav class="nav-bar">
-            <button class="nav-item" data-view="schueler">
+            <button class="nav-item active" data-view="schueler">
                 <i class="fas fa-user"></i>
                 <span>Schüler</span>
             </button>
@@ -26,21 +26,54 @@
             </button>
         </nav>
 
-        <!-- Verschiedene Views -->
+        <!-- Schüler View -->
         <div class="view" id="schueler-view">
-            <!-- Schüler-Content -->
+            <div class="content-container">
+                <h2>Schülerliste</h2>
+                <div class="schueler-liste">
+                    <!-- Schüler-Einträge -->
+                    <div class="schueler-card">
+                        <h3>Max Mustermann</h3>
+                        <p>Klasse B</p>
+                        <p>Beginn: 01.01.2024</p>
+                    </div>
+                    <!-- Weitere Schüler... -->
+                </div>
+                <button class="fab" onclick="app.openNeuerSchuelerModal()">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
         </div>
 
+        <!-- Fahrstunden View -->
         <div class="view" id="fahrstunden-view">
-            <!-- Fahrstunden-Liste -->
+            <div class="content-container">
+                <h2>Fahrstunden</h2>
+                <div class="fahrstunden-liste">
+                    <!-- Fahrstunden-Einträge -->
+                    <div class="fahrstunden-card">
+                        <div class="card-header">
+                            <h3>Max Mustermann</h3>
+                            <span>15.03.2024 14:00</span>
+                        </div>
+                        <div class="card-actions">
+                            <button onclick="app.openBewertungView(1)">Bewerten</button>
+                        </div>
+                    </div>
+                    <!-- Weitere Fahrstunden... -->
+                </div>
+                <button class="fab" onclick="app.openNeueFahrstundeModal()">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
         </div>
 
-        <div class="view" id="bewertung-view" style="display: none;">
-            <!-- Neue Vollbild-Bewertung -->
+        <!-- Bewertungs View -->
+        <div class="view" id="bewertung-view">
             <div class="fahrstunde-bewertung">
                 <header class="bewertung-header">
                     <div class="header-actions">
-                        <button class="btn btn-secondary" onclick="app.closeBewerungView()">
+                        <button class="btn btn-secondary" onclick="app.closeBewertungView()">
                             <i class="fas fa-arrow-left"></i> Zurück
                         </button>
                         <h1>Fahrstunden-Bewertung</h1>
@@ -53,13 +86,21 @@
                 </header>
                 
                 <div class="tabelle-container">
-                    <!-- Bewertungstabelle wie gehabt -->
+                    <table class="bewertung-tabelle">
+                        <!-- ... Bewertungstabelle wie gehabt ... -->
+                    </table>
                 </div>
             </div>
         </div>
 
+        <!-- Berichte View -->
         <div class="view" id="berichte-view">
-            <!-- Berichte-Content -->
+            <div class="content-container">
+                <h2>Berichte</h2>
+                <div class="berichte-liste">
+                    <!-- Berichte-Einträge -->
+                </div>
+            </div>
         </div>
     </div>
 
