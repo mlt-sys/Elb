@@ -68,6 +68,33 @@ class FahrschulApp {
             e.target.dataset.editId = '';
             document.getElementById('modal-title').textContent = 'Neuen Schüler anlegen';
         });
+
+        // Fahrstunden Modal öffnen
+        document.getElementById('add-fahrstunde').addEventListener('click', () => {
+            this.showFahrstundenModal();
+        });
+
+        // Fahrstunden Formular
+        document.getElementById('fahrstunden-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            
+            const fahrstunde = {
+                id: Date.now(),
+                schuelerId: parseInt(formData.get('schueler')),
+                datum: formData.get('datum'),
+                dauer: parseInt(formData.get('dauer')),
+                themen: formData.get('themen'),
+                bemerkungen: formData.get('bemerkungen'),
+                erstelltAm: new Date()
+            };
+
+            this.db.fahrstunden.push(fahrstunde);
+            this.saveData();
+            this.renderFahrstundenListe();
+            this.closeFahrstundenModal();
+            e.target.reset();
+        });
     }
 
     switchView(view) {
@@ -75,12 +102,12 @@ class FahrschulApp {
         document.querySelectorAll('.view').forEach(v => v.style.display = 'none');
         document.querySelector(`.${view}-view`).style.display = 'block';
         
-        // Aktualisiere die Liste beim Wechsel zur Schüleransicht
         if (view === 'schueler') {
             this.renderSchuelerListe();
+        } else if (view === 'fahrstunden') {
+            this.renderFahrstundenListe();
         }
         
-        // Update aktive Navigation
         document.querySelectorAll('.nav-item').forEach(item => {
             item.classList.remove('active');
             if(item.getAttribute('data-view') === view) {
@@ -202,6 +229,67 @@ class FahrschulApp {
             this.db.schueler = this.db.schueler.filter(s => s.id !== id);
             this.saveData();
             this.renderSchuelerListe();
+        }
+    }
+
+    showFahrstundenModal() {
+        document.getElementById('fahrstunden-modal').style.display = 'block';
+        // Schülerliste für Dropdown füllen
+        const select = document.getElementById('schueler-select');
+        select.innerHTML = this.db.schueler.map(schueler => 
+            `<option value="${schueler.id}">${schueler.name}</option>`
+        ).join('');
+    }
+
+    closeFahrstundenModal() {
+        document.getElementById('fahrstunden-modal').style.display = 'none';
+    }
+
+    renderFahrstundenListe() {
+        const liste = document.getElementById('fahrstunden-liste');
+        
+        if (this.db.fahrstunden.length === 0) {
+            liste.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-car"></i>
+                    <h3>Keine Fahrstunden vorhanden</h3>
+                    <p>Erfasse deine erste Fahrstunde!</p>
+                    <button class="btn btn-primary" onclick="app.showFahrstundenModal()">
+                        <i class="fas fa-plus"></i> Fahrstunde hinzufügen
+                    </button>
+                </div>
+            `;
+        } else {
+            liste.innerHTML = this.db.fahrstunden
+                .sort((a, b) => new Date(b.datum) - new Date(a.datum))
+                .map(stunde => {
+                    const schueler = this.db.schueler.find(s => s.id === stunde.schuelerId);
+                    return `
+                        <div class="card">
+                            <div class="card-content">
+                                <h2 class="card-title">${schueler ? schueler.name : 'Unbekannt'}</h2>
+                                <p class="card-subtitle">
+                                    ${new Date(stunde.datum).toLocaleDateString()} • ${stunde.dauer} Minuten
+                                    <br>
+                                    <small>Themen: ${stunde.themen}</small>
+                                </p>
+                            </div>
+                            <div class="card-actions">
+                                <button class="icon-button delete" onclick="app.deleteFahrstunde(${stunde.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+        }
+    }
+
+    deleteFahrstunde(id) {
+        if (confirm('Fahrstunde wirklich löschen?')) {
+            this.db.fahrstunden = this.db.fahrstunden.filter(f => f.id !== id);
+            this.saveData();
+            this.renderFahrstundenListe();
         }
     }
 }

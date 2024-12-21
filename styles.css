@@ -3,6 +3,7 @@
     --background-color: #f5f5f5;
 }
 
+/* Basis Styling */
 body {
     margin: 0;
     padding: 0;
@@ -16,6 +17,7 @@ body {
     padding: 20px;
 }
 
+/* Navigation */
 .nav-bar {
     position: fixed;
     bottom: 0;
@@ -23,15 +25,18 @@ body {
     right: 0;
     background: white;
     padding: 16px;
-    border-top: 1px solid #eee;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
     display: flex;
     justify-content: space-around;
+    border-top: 1px solid #eee;
 }
 
 .nav-item {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-decoration: none;
+    color: #666;
     font-size: 12px;
 }
 
@@ -42,42 +47,22 @@ body {
 
 .nav-item.active {
     color: var(--primary-color);
-} 
-
-/* Schöne Buttons */
-.add-button {
-    position: fixed;
-    right: 20px;
-    bottom: 80px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    font-size: 24px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s;
 }
 
-.add-button:active {
-    transform: scale(0.95);
-}
-
-/* Karten-Design für Listen */
+/* Karten */
 .card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background: white;
     border-radius: 12px;
     padding: 16px;
     margin: 12px 0;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+}
+
+.card-content {
+    flex: 1;
 }
 
 .card-title {
@@ -93,135 +78,12 @@ body {
     margin: 0;
 }
 
-/* Header Styling */
-.view h1 {
-    font-size: 24px;
-    color: #333;
-    margin: 0 0 20px 0;
-    padding: 0 16px;
-}
-
-/* Listen Container */
-.list-container {
-    padding: 16px;
-    padding-bottom: 80px; /* Platz für Navigation */
-}
-
-/* Modal Styling */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 1000;
-}
-
-.modal-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 24px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 500px;
-    max-height: 80vh;
-    overflow-y: auto;
-}
-
-/* Formular Styling */
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #333;
-}
-
-.form-group input[type="text"] {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-}
-
-/* Führerscheinklassen Grid */
-.klassen-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.klasse-option {
-    position: relative;
-}
-
-.klasse-option input[type="checkbox"] {
-    display: none;
-}
-
-.klasse-option label {
-    display: block;
-    padding: 10px;
-    background: #f5f5f5;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.klasse-option input[type="checkbox"]:checked + label {
-    background: var(--primary-color);
-    color: white;
-    border-color: var(--primary-color);
-}
-
-/* Button Styling */
-.button-group {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.btn {
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    flex: 1;
-}
-
-.btn-primary {
-    background: var(--primary-color);
-    color: white;
-}
-
-.btn-secondary {
-    background: #f5f5f5;
-    color: #333;
-}
-
-/* Card Actions */
-.card-content {
-    flex: 1;
-}
-
 .card-actions {
     display: flex;
     gap: 8px;
 }
 
+/* Buttons */
 .icon-button {
     background: none;
     border: none;
@@ -248,29 +110,140 @@ body {
     color: #F44336;
 }
 
-/* Bestätigungs-Dialog Styling */
-.dialog-overlay {
+.add-button {
+    position: fixed;
+    right: 20px;
+    bottom: 80px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    font-size: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.add-button:active {
+    transform: scale(0.95);
+}
+
+/* Modal */
+.modal {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     background: rgba(0,0,0,0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1001;
+    z-index: 1000;
 }
 
-.dialog {
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background: white;
     padding: 24px;
     border-radius: 12px;
-    max-width: 400px;
     width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
-/* Empty State Styling */
+/* Formulare */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Führerscheinklassen Grid */
+.klassen-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.klasse-option input[type="checkbox"] {
+    display: none;
+}
+
+.klasse-option label {
+    display: block;
+    padding: 10px;
+    background: #f5f5f5;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.klasse-option input[type="checkbox"]:checked + label {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    flex: 1;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-secondary {
+    background: #f5f5f5;
+    color: #333;
+}
+
+/* Empty State */
 .empty-state {
     text-align: center;
     padding: 40px 20px;
@@ -293,19 +266,7 @@ body {
     margin: 0 0 24px 0;
 }
 
-.empty-state .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.empty-state .btn i {
-    font-size: 16px;
-    color: white;
-    margin: 0;
-}
-
-/* Sortierung Styling */
+/* Sortierung */
 .sort-header {
     display: flex;
     gap: 10px;
@@ -340,9 +301,15 @@ body {
     font-size: 14px;
 }
 
-/* Datum-Anzeige in Karten */
-.card-subtitle small {
-    color: #888;
-    font-size: 12px;
+/* Listen Container */
+.list-container {
+    padding-bottom: 80px;
 }
-  
+
+/* Überschriften */
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin: 0 0 20px 0;
+    padding: 0 16px;
+} 

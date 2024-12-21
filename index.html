@@ -122,6 +122,46 @@
                 </form>
             </div>
         </div>
+
+        <!-- Fahrstunden Modal -->
+        <div class="modal" id="fahrstunden-modal">
+            <div class="modal-content">
+                <h2>Neue Fahrstunde</h2>
+                <form id="fahrstunden-form">
+                    <div class="form-group">
+                        <label for="schueler-select">Schüler</label>
+                        <select id="schueler-select" name="schueler" required>
+                            <!-- Wird dynamisch gefüllt -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="datum">Datum</label>
+                        <input type="date" id="datum" name="datum" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dauer">Dauer (Minuten)</label>
+                        <input type="number" id="dauer" name="dauer" value="45" min="15" step="15" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="themen">Behandelte Themen</label>
+                        <input type="text" id="themen" name="themen" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bemerkungen">Bemerkungen</label>
+                        <textarea id="bemerkungen" name="bemerkungen" rows="3"></textarea>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="button" class="btn btn-secondary" onclick="app.closeFahrstundenModal()">Abbrechen</button>
+                        <button type="submit" class="btn btn-primary">Speichern</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script src="app.js"></script>
