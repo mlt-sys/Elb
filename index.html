@@ -41,18 +41,18 @@
 
         <!-- Navigation -->
         <nav class="nav-bar">
-            <a href="#" class="nav-item active" data-view="schueler">
+            <button class="nav-item active" data-view="schueler" onclick="app.switchView('schueler')">
                 <i class="fas fa-user"></i>
                 <span>Schüler</span>
-            </a>
-            <a href="#" class="nav-item" data-view="fahrstunden">
+            </button>
+            <button class="nav-item" data-view="fahrstunden" onclick="app.switchView('fahrstunden')">
                 <i class="fas fa-car"></i>
                 <span>Fahrstunden</span>
-            </a>
-            <a href="#" class="nav-item" data-view="berichte">
+            </button>
+            <button class="nav-item" data-view="berichte" onclick="app.switchView('berichte')">
                 <i class="fas fa-file-alt"></i>
                 <span>Berichte</span>
-            </a>
+            </button>
         </nav>
 
         <!-- Schüler Modal -->

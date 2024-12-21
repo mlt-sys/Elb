@@ -20,7 +20,7 @@ class FahrschulApp {
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', (e) => {
                 e.preventDefault();
-                const view = e.target.getAttribute('data-view');
+                const view = e.target.closest('.nav-item').getAttribute('data-view');
                 this.switchView(view);
             });
         });
