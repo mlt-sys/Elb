@@ -9,11 +9,34 @@
 </head>
 <body>
     <div id="app">
-        <!-- Deine App-Inhalte -->
+        <!-- Schüler-Ansicht -->
+        <div class="view schueler-view">
+            <h1>Schüler</h1>
+            <div id="schueler-liste"></div>
+        </div>
+
+        <!-- Fahrstunden-Ansicht -->
+        <div class="view fahrstunden-view" style="display: none;">
+            <h1>Fahrstunden</h1>
+            <div id="fahrstunden-liste"></div>
+        </div>
+
+        <!-- Berichte-Ansicht -->
+        <div class="view berichte-view" style="display: none;">
+            <h1>Berichte</h1>
+            <div id="berichte-liste"></div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="nav-bar">
+            <a href="#" class="nav-item active" data-view="schueler">Schüler</a>
+            <a href="#" class="nav-item" data-view="fahrstunden">Fahrstunden</a>
+            <a href="#" class="nav-item" data-view="berichte">Berichte</a>
+        </nav>
     </div>
+
     <script src="js/app.js"></script>
     <script>
-        // Service Worker registrieren
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js');
         }
