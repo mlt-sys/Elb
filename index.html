@@ -128,31 +128,136 @@
             <div class="modal-content">
                 <h2>Neue Fahrstunde</h2>
                 <form id="fahrstunden-form">
+                    <!-- Basis-Informationen -->
                     <div class="form-group">
                         <label for="schueler-select">Schüler</label>
                         <select id="schueler-select" name="schueler" required>
                             <!-- Wird dynamisch gefüllt -->
                         </select>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="datum">Datum</label>
-                        <input type="date" id="datum" name="datum" required>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="datum">Datum</label>
+                            <input type="date" id="datum" name="datum" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="startzeit">Startzeit</label>
+                            <input type="time" id="startzeit" name="startzeit" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dauer">Dauer (Min.)</label>
+                            <input type="number" id="dauer" name="dauer" value="45" min="15" step="15" required>
+                        </div>
                     </div>
 
+                    <!-- Fahrstunden-Typ -->
                     <div class="form-group">
-                        <label for="dauer">Dauer (Minuten)</label>
-                        <input type="number" id="dauer" name="dauer" value="45" min="15" step="15" required>
+                        <label>Art der Fahrstunde</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="typ" value="normal" checked>
+                                <span>Normal</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="typ" value="prüfungsvorbereitung">
+                                <span>Prüfungsvorbereitung</span>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="typ" value="prüfung">
+                                <span>Prüfung</span>
+                            </label>
+                        </div>
                     </div>
 
+                    <!-- Kompetenzbereiche -->
                     <div class="form-group">
-                        <label for="themen">Behandelte Themen</label>
-                        <input type="text" id="themen" name="themen" required>
+                        <label>Behandelte Kompetenzbereiche</label>
+                        <div class="kompetenz-grid">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="kompetenzen" value="grundfahraufgaben">
+                                <span>Grundfahraufgaben</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="kompetenzen" value="innerort">
+                                <span>Innerort</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="kompetenzen" value="landstrasse">
+                                <span>Landstraße</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="kompetenzen" value="autobahn">
+                                <span>Autobahn</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="kompetenzen" value="dunkelheit">
+                                <span>Dunkelheit</span>
+                            </label>
+                        </div>
                     </div>
 
+                    <!-- Bewertung -->
                     <div class="form-group">
-                        <label for="bemerkungen">Bemerkungen</label>
-                        <textarea id="bemerkungen" name="bemerkungen" rows="3"></textarea>
+                        <label>Bewertung der Leistung</label>
+                        <div class="rating-grid">
+                            <div class="rating-item">
+                                <label>Verkehrsbeobachtung</label>
+                                <select name="bewertung_beobachtung">
+                                    <option value="1">Sehr gut</option>
+                                    <option value="2">Gut</option>
+                                    <option value="3" selected>Befriedigend</option>
+                                    <option value="4">Ausreichend</option>
+                                    <option value="5">Mangelhaft</option>
+                                </select>
+                            </div>
+                            <div class="rating-item">
+                                <label>Fahrzeugbedienung</label>
+                                <select name="bewertung_bedienung">
+                                    <option value="1">Sehr gut</option>
+                                    <option value="2">Gut</option>
+                                    <option value="3" selected>Befriedigend</option>
+                                    <option value="4">Ausreichend</option>
+                                    <option value="5">Mangelhaft</option>
+                                </select>
+                            </div>
+                            <div class="rating-item">
+                                <label>Geschwindigkeit</label>
+                                <select name="bewertung_geschwindigkeit">
+                                    <option value="1">Sehr gut</option>
+                                    <option value="2">Gut</option>
+                                    <option value="3" selected>Befriedigend</option>
+                                    <option value="4">Ausreichend</option>
+                                    <option value="5">Mangelhaft</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bemerkungen -->
+                    <div class="form-group">
+                        <label for="bemerkungen">Bemerkungen & nächste Schwerpunkte</label>
+                        <textarea id="bemerkungen" name="bemerkungen" rows="4" 
+                            placeholder="Notizen zur Fahrstunde und Schwerpunkte für die nächste Stunde..."></textarea>
+                    </div>
+
+                    <!-- Besondere Vorkommnisse -->
+                    <div class="form-group">
+                        <label>Besondere Vorkommnisse</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="vorkommnisse" value="eingriff">
+                                <span>Eingriff notwendig</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="vorkommnisse" value="gefaehrdung">
+                                <span>Gefährdung</span>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" name="vorkommnisse" value="unfall">
+                                <span>Unfall</span>
+                            </label>
+                        </div>
                     </div>
 
                     <div class="button-group">

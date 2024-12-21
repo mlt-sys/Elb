@@ -83,9 +83,17 @@ class FahrschulApp {
                 id: Date.now(),
                 schuelerId: parseInt(formData.get('schueler')),
                 datum: formData.get('datum'),
+                startzeit: formData.get('startzeit'),
                 dauer: parseInt(formData.get('dauer')),
-                themen: formData.get('themen'),
+                typ: formData.get('typ'),
+                kompetenzen: formData.getAll('kompetenzen'),
+                bewertungen: {
+                    beobachtung: formData.get('bewertung_beobachtung'),
+                    bedienung: formData.get('bewertung_bedienung'),
+                    geschwindigkeit: formData.get('bewertung_geschwindigkeit')
+                },
                 bemerkungen: formData.get('bemerkungen'),
+                vorkommnisse: formData.getAll('vorkommnisse'),
                 erstelltAm: new Date()
             };
 
