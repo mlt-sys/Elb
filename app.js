@@ -22,6 +22,32 @@ class FahrschulApp {
                 this.switchView(view);
             });
         });
+
+        // Modal öffnen
+        document.getElementById('add-schueler').addEventListener('click', () => {
+            this.showSchuelerModal();
+        });
+
+        // Formular absenden
+        document.getElementById('schueler-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const name = formData.get('name');
+            const klassen = formData.getAll('klassen');
+            
+            const neuerSchueler = {
+                id: Date.now(),
+                name: name,
+                klassen: klassen,
+                erstelltAm: new Date()
+            };
+
+            this.db.schueler.push(neuerSchueler);
+            this.saveData();
+            this.renderSchuelerListe();
+            this.closeSchuelerModal();
+            e.target.reset();
+        });
     }
 
     switchView(view) {
@@ -41,6 +67,24 @@ class FahrschulApp {
     saveData() {
         localStorage.setItem('schueler', JSON.stringify(this.db.schueler));
         localStorage.setItem('fahrstunden', JSON.stringify(this.db.fahrstunden));
+    }
+
+    showSchuelerModal() {
+        document.getElementById('schueler-modal').style.display = 'block';
+    }
+
+    closeSchuelerModal() {
+        document.getElementById('schueler-modal').style.display = 'none';
+    }
+
+    renderSchuelerListe() {
+        const liste = document.getElementById('schueler-liste');
+        liste.innerHTML = this.db.schueler.map(schueler => `
+            <div class="card">
+                <h2 class="card-title">${schueler.name}</h2>
+                <p class="card-subtitle">Klassen: ${schueler.klassen.join(', ')}</p>
+            </div>
+        `).join('');
     }
 }
 
