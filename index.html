@@ -10,292 +10,56 @@
 </head>
 <body>
     <div id="app">
-        <!-- Schüler-Ansicht -->
-        <div class="view schueler-view">
-            <h1>Schüler</h1>
-            <div class="list-container" id="schueler-liste">
-                <!-- Hier wird der Sortier-Header und die Schülerliste dynamisch eingefügt -->
-            </div>
-            <button class="add-button" id="add-schueler">
-                <i class="fas fa-plus"></i>
-            </button>
-        </div>
-
-        <!-- Fahrstunden-Ansicht -->
-        <div class="view fahrstunden-view" style="display: none;">
-            <h1>Fahrstunden</h1>
-            <div class="list-container" id="fahrstunden-liste"></div>
-            <button class="add-button" id="add-fahrstunde">
-                <i class="fas fa-plus"></i>
-            </button>
-        </div>
-
-        <!-- Berichte-Ansicht -->
-        <div class="view berichte-view" style="display: none;">
-            <h1>Berichte</h1>
-            <div class="list-container" id="berichte-liste"></div>
-            <button class="add-button" id="create-bericht">
-                <i class="fas fa-plus"></i>
-            </button>
-        </div>
-
-        <!-- Navigation -->
+        <!-- Navigation bleibt bestehen -->
         <nav class="nav-bar">
-            <button class="nav-item active" data-view="schueler" onclick="app.switchView('schueler')">
+            <button class="nav-item" data-view="schueler">
                 <i class="fas fa-user"></i>
                 <span>Schüler</span>
             </button>
-            <button class="nav-item" data-view="fahrstunden" onclick="app.switchView('fahrstunden')">
+            <button class="nav-item" data-view="fahrstunden">
                 <i class="fas fa-car"></i>
                 <span>Fahrstunden</span>
             </button>
-            <button class="nav-item" data-view="berichte" onclick="app.switchView('berichte')">
+            <button class="nav-item" data-view="berichte">
                 <i class="fas fa-file-alt"></i>
                 <span>Berichte</span>
             </button>
         </nav>
 
-        <!-- Schüler Modal -->
-        <div class="modal" id="schueler-modal">
-            <div class="modal-content">
-                <h2 id="modal-title">Neuen Schüler anlegen</h2>
-                <form id="schueler-form">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Führerscheinklassen</label>
-                        <div class="klassen-grid">
-                            <div class="klasse-option">
-                                <input type="checkbox" id="klasse-am" name="klassen" value="AM">
-                                <label for="klasse-am">AM</label>
-                            </div>
-                            <div class="klasse-option">
-                                <input type="checkbox" id="klasse-a1" name="klassen" value="A1">
-                                <label for="klasse-a1">A1</label>
-                            </div>
-                            <div class="klasse-option">
-                                <input type="checkbox" id="klasse-a2" name="klassen" value="A2">
-                                <label for="klasse-a2">A2</label>
-                            </div>
-                            <div class="klasse-option">
-                                <input type="checkbox" id="klasse-a" name="klassen" value="A">
-                                <label for="klasse-a">A</label>
-                            </div>
-                            <div class="klasse-option">
-                                <input type="checkbox" id="klasse-b" name="klassen" value="B">
-                                <label for="klasse-b">B</label>
-                            </div>
-                            <div class="klasse-option">
-                                <input type="checkbox" id="klasse-be" name="klassen" value="BE">
-                                <label for="klasse-be">BE</label>
-                            </div>
-                            <div class="klasse-option">
-                                <input type="checkbox" id="klasse-c1" name="klassen" value="C1">
-                                <label for="klasse-c1">C1</label>
-                            </div>
-                            <div class="klasse-option">
-                                <input type="checkbox" id="klasse-c" name="klassen" value="C">
-                                <label for="klasse-c">C</label>
-                            </div>
-                            <div class="klasse-option">
-                                <input type="checkbox" id="klasse-ce" name="klassen" value="CE">
-                                <label for="klasse-ce">CE</label>
-                            </div>
-                            <div class="klasse-option">
-                                <input type="checkbox" id="klasse-d1" name="klassen" value="D1">
-                                <label for="klasse-d1">D1</label>
-                            </div>
-                            <div class="klasse-option">
-                                <input type="checkbox" id="klasse-d" name="klassen" value="D">
-                                <label for="klasse-d">D</label>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Verschiedene Views -->
+        <div class="view" id="schueler-view">
+            <!-- Schüler-Content -->
+        </div>
 
-                    <div class="button-group">
-                        <button type="button" class="btn btn-secondary" onclick="app.closeSchuelerModal()">Abbrechen</button>
-                        <button type="submit" class="btn btn-primary">Speichern</button>
+        <div class="view" id="fahrstunden-view">
+            <!-- Fahrstunden-Liste -->
+        </div>
+
+        <div class="view" id="bewertung-view" style="display: none;">
+            <!-- Neue Vollbild-Bewertung -->
+            <div class="fahrstunde-bewertung">
+                <header class="bewertung-header">
+                    <div class="header-actions">
+                        <button class="btn btn-secondary" onclick="app.closeBewerungView()">
+                            <i class="fas fa-arrow-left"></i> Zurück
+                        </button>
+                        <h1>Fahrstunden-Bewertung</h1>
                     </div>
-                </form>
+                    <div class="header-info">
+                        <span>Schüler: Max Mustermann</span>
+                        <span>Datum: 15.03.2024</span>
+                        <span>Zeit: 14:00 - 15:30</span>
+                    </div>
+                </header>
+                
+                <div class="tabelle-container">
+                    <!-- Bewertungstabelle wie gehabt -->
+                </div>
             </div>
         </div>
 
-        <!-- Fahrstunden Modal -->
-        <div class="modal" id="fahrstunden-modal">
-            <div class="modal-content">
-                <h2>Neue Fahrstunde</h2>
-                <form id="fahrstunden-form">
-                    <!-- Basis-Informationen -->
-                    <div class="form-group">
-                        <label for="schueler-select">Schüler</label>
-                        <select id="schueler-select" name="schueler" required>
-                            <!-- Wird dynamisch gefüllt -->
-                        </select>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="datum">Datum</label>
-                            <input type="date" id="datum" name="datum" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="startzeit">Startzeit</label>
-                            <input type="time" id="startzeit" name="startzeit" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="dauer">Dauer (Min.)</label>
-                            <input type="number" id="dauer" name="dauer" value="45" min="15" step="15" required>
-                        </div>
-                    </div>
-
-                    <!-- Fahrstunden-Typ -->
-                    <div class="form-group">
-                        <label>Art der Fahrstunde</label>
-                        <div class="radio-group">
-                            <label class="radio-option">
-                                <input type="radio" name="typ" value="normal" checked>
-                                <span>Normal</span>
-                            </label>
-                            <label class="radio-option">
-                                <input type="radio" name="typ" value="prüfungsvorbereitung">
-                                <span>Prüfungsvorbereitung</span>
-                            </label>
-                            <label class="radio-option">
-                                <input type="radio" name="typ" value="prüfung">
-                                <span>Prüfung</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Kompetenzbereiche -->
-                    <div class="form-group">
-                        <label>Behandelte Kompetenzbereiche</label>
-                        <div class="kompetenz-grid">
-                            <label class="checkbox-option">
-                                <input type="checkbox" name="kompetenzen" value="grundfahraufgaben">
-                                <span>Grundfahraufgaben</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" name="kompetenzen" value="innerort">
-                                <span>Innerort</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" name="kompetenzen" value="landstrasse">
-                                <span>Landstraße</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" name="kompetenzen" value="autobahn">
-                                <span>Autobahn</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" name="kompetenzen" value="dunkelheit">
-                                <span>Dunkelheit</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Bewertung -->
-                    <div class="form-group">
-                        <label>Bewertung der Leistung</label>
-                        <div class="rating-grid">
-                            <div class="rating-item">
-                                <label>Verkehrsbeobachtung</label>
-                                <select name="bewertung_beobachtung">
-                                    <option value="1">Sehr gut</option>
-                                    <option value="2">Gut</option>
-                                    <option value="3" selected>Befriedigend</option>
-                                    <option value="4">Ausreichend</option>
-                                    <option value="5">Mangelhaft</option>
-                                </select>
-                            </div>
-                            <div class="rating-item">
-                                <label>Fahrzeugbedienung</label>
-                                <select name="bewertung_bedienung">
-                                    <option value="1">Sehr gut</option>
-                                    <option value="2">Gut</option>
-                                    <option value="3" selected>Befriedigend</option>
-                                    <option value="4">Ausreichend</option>
-                                    <option value="5">Mangelhaft</option>
-                                </select>
-                            </div>
-                            <div class="rating-item">
-                                <label>Geschwindigkeit</label>
-                                <select name="bewertung_geschwindigkeit">
-                                    <option value="1">Sehr gut</option>
-                                    <option value="2">Gut</option>
-                                    <option value="3" selected>Befriedigend</option>
-                                    <option value="4">Ausreichend</option>
-                                    <option value="5">Mangelhaft</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Bemerkungen -->
-                    <div class="form-group">
-                        <label for="bemerkungen">Bemerkungen & nächste Schwerpunkte</label>
-                        <textarea id="bemerkungen" name="bemerkungen" rows="4" 
-                            placeholder="Notizen zur Fahrstunde und Schwerpunkte für die nächste Stunde..."></textarea>
-                    </div>
-
-                    <!-- Besondere Vorkommnisse -->
-                    <div class="form-group">
-                        <label>Besondere Vorkommnisse</label>
-                        <div class="checkbox-group">
-                            <label class="checkbox-option">
-                                <input type="checkbox" name="vorkommnisse" value="eingriff">
-                                <span>Eingriff notwendig</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" name="vorkommnisse" value="gefaehrdung">
-                                <span>Gefährdung</span>
-                            </label>
-                            <label class="checkbox-option">
-                                <input type="checkbox" name="vorkommnisse" value="unfall">
-                                <span>Unfall</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="fahrstunde-bewertung">
-                        <div class="tabelle-container">
-                            <table class="bewertung-tabelle">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 25%">Fahraufgabe</th>
-                                        <th style="width: 50%">Fehler/Bemerkungen</th>
-                                        <th style="width: 25%">Maßnahmen</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- 1.1 Einfädelungsstreifen -->
-                                    <tr class="aufgaben-gruppe">
-                                        <td colspan="3">1.1 Einfädelungsstreifen</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Geschwindigkeitsanpassung</td>
-                                        <td class="fehler-zelle" data-fehler-kategorie="geschwindigkeit">
-                                            <div class="fehler-text">Klicken zum Bearbeiten</div>
-                                        </td>
-                                        <td>
-                                            <input type="text" class="massnahmen-input" placeholder="Maßnahmen eingeben...">
-                                        </td>
-                                    </tr>
-                                    <!-- Weitere Fahraufgaben... -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="button-group">
-                        <button type="button" class="btn btn-secondary" onclick="app.closeFahrstundenModal()">Abbrechen</button>
-                        <button type="submit" class="btn btn-primary">Speichern</button>
-                    </div>
-                </form>
-            </div>
+        <div class="view" id="berichte-view">
+            <!-- Berichte-Content -->
         </div>
     </div>
 

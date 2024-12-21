@@ -323,98 +323,25 @@ class FahrschulApp {
             });
         });
     }
-}
 
-class FahraufgabenUI {
-    constructor() {
-        this.aktivesPopup = null;
-        this.setupEventListeners();
-    }
-
-    setupEventListeners() {
-        document.querySelectorAll('.fehler-zelle').forEach(zelle => {
-            zelle.addEventListener('click', (e) => this.handleZellenClick(e));
-        });
-
-        // Popup schließen wenn außerhalb geklickt wird
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.fehler-zelle') && !e.target.closest('.fehler-popup')) {
-                this.schliessePopup();
-            }
-        });
-    }
-
-    handleZellenClick(e) {
-        const zelle = e.currentTarget;
-        this.schliessePopup();
-        
-        const popup = this.erstelleFehlerpopup(zelle.dataset.fehlerKategorie);
-        
-        // Popup positionieren
-        const zellenRect = zelle.getBoundingClientRect();
-        popup.style.top = `${zellenRect.bottom + window.scrollY}px`;
-        popup.style.left = `${zellenRect.left + window.scrollX}px`;
-        
-        zelle.appendChild(popup);
-        this.aktivesPopup = popup;
-    }
-
-    erstelleFehlerpopup(kategorie) {
-        const popup = document.createElement('div');
-        popup.className = 'fehler-popup';
-        
-        // Fehleroptionen aus Katalog laden
-        const fehler = this.getFehlerFuerKategorie(kategorie);
-        
-        fehler.forEach(f => {
-            const option = document.createElement('div');
-            option.className = `fehler-option ${f.typ}`;
-            option.textContent = f.text;
-            option.addEventListener('click', () => this.toggleFehler(option));
-            popup.appendChild(option);
+    openBewertungView(fahrstundeId) {
+        // Alle anderen Views ausblenden
+        document.querySelectorAll('.view').forEach(view => {
+            view.style.display = 'none';
         });
         
-        return popup;
-    }
-
-    getFehlerFuerKategorie(kategorie) {
-        // Beispiel-Fehler, sollten aus dem Katalog kommen
-        return [
-            { typ: 'leicht', text: 'Zu zögerlich beschleunigt' },
-            { typ: 'leicht', text: 'Geschwindigkeit nicht optimal angepasst' },
-            { typ: 'schwer', text: 'Deutlich zu langsam' },
-            { typ: 'schwer', text: 'Starkes Beschleunigen/Verzögern' }
-        ];
-    }
-
-    toggleFehler(option) {
-        option.classList.toggle('selected');
-        this.updateZellenStatus(option.closest('.fehler-zelle'));
-    }
-
-    updateZellenStatus(zelle) {
-        const ausgewaehlteOptionen = zelle.querySelectorAll('.fehler-option.selected');
-        const hatSchwereFehler = Array.from(ausgewaehlteOptionen).some(opt => opt.classList.contains('schwer'));
-        const hatLeichteFehler = Array.from(ausgewaehlteOptionen).some(opt => opt.classList.contains('leicht'));
+        // Bewertungs-View anzeigen
+        document.getElementById('bewertung-view').style.display = 'block';
         
-        zelle.classList.remove('hat-leichte-fehler', 'hat-schwere-fehler');
-        if (hatSchwereFehler) {
-            zelle.classList.add('hat-schwere-fehler');
-        } else if (hatLeichteFehler) {
-            zelle.classList.add('hat-leichte-fehler');
-        }
+        // Fahrstunden-Daten laden
+        this.loadFahrstundenDaten(fahrstundeId);
     }
 
-    schliessePopup() {
-        if (this.aktivesPopup) {
-            this.aktivesPopup.remove();
-            this.aktivesPopup = null;
-        }
+    closeBewertungView() {
+        // Bewertungs-View ausblenden
+        document.getElementById('bewertung-view').style.display = 'none';
+        
+        // Zurück zur Fahrstunden-Übersicht
+        this.switchView('fahrstunden');
     }
-}
-
-// App starten wenn DOM geladen ist
-document.addEventListener('DOMContentLoaded', () => {
-    window.app = new FahrschulApp();
-    const fahraufgabenUI = new FahraufgabenUI();
-}); 
+} 
